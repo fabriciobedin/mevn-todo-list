@@ -23,7 +23,7 @@ const routes = new Router({
       path: "/tasks",
       name: "tasks-all",
       component: TasksAll,
-      beforeEnter: (toolbar, from, next) => {
+      beforeEnter: (to, from, next) => {
         if (isLoggedIn) {
           next();
         } else {
@@ -35,7 +35,7 @@ const routes = new Router({
       path: "/tasks/new",
       name: "tasks-create",
       component: TasksCreate,
-      beforeEnter: (toolbar, from, next) => {
+      beforeEnter: (to, from, next) => {
         if (isLoggedIn) {
           next();
         } else {
@@ -47,7 +47,7 @@ const routes = new Router({
       path: "/tasks/:id",
       name: "tasks-edit",
       component: TasksEdit,
-      beforeEnter: (toolbar, from, next) => {
+      beforeEnter: (to, from, next) => {
         if (isLoggedIn) {
           next();
         } else {
@@ -59,7 +59,7 @@ const routes = new Router({
       path: "/register",
       name: "register",
       component: Register,
-      beforeEnter: (toolbar, from, next) => {
+      beforeEnter: (to, from, next) => {
         if (!isLoggedIn) {
           next();
         } else {
@@ -71,7 +71,7 @@ const routes = new Router({
       path: "/login",
       name: "login",
       component: Login,
-      beforeEnter: (toolbar, from, next) => {
+      beforeEnter: (to, from, next) => {
         if (!isLoggedIn) {
           next();
         } else {
