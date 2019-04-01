@@ -8,8 +8,9 @@ import TasksCreate from "./views/tasks/TasksCreate.vue";
 import TasksEdit from "./views/tasks/TasksEdit.vue";
 
 Vue.use(Router);
+const isLoggedIn = false;
 
-export default new Router({
+const routes = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
@@ -21,27 +22,62 @@ export default new Router({
     {
       path: "/tasks",
       name: "tasks-all",
-      component: TasksAll
+      component: TasksAll,
+      beforeEnter: (toolbar, from, next) => {
+        if (isLoggedIn) {
+          next();
+        } else {
+          next("/login");
+        }
+      }
     },
     {
       path: "/tasks/new",
       name: "tasks-create",
-      component: TasksCreate
+      component: TasksCreate,
+      beforeEnter: (toolbar, from, next) => {
+        if (isLoggedIn) {
+          next();
+        } else {
+          next("/login");
+        }
+      }
     },
     {
       path: "/tasks/:id",
       name: "tasks-edit",
-      component: TasksEdit
+      component: TasksEdit,
+      beforeEnter: (toolbar, from, next) => {
+        if (isLoggedIn) {
+          next();
+        } else {
+          next("/login");
+        }
+      }
     },
     {
       path: "/register",
       name: "register",
-      component: Register
+      component: Register,
+      beforeEnter: (toolbar, from, next) => {
+        if (!isLoggedIn) {
+          next();
+        } else {
+          next("/");
+        }
+      }
     },
     {
       path: "/login",
       name: "login",
-      component: Login
+      component: Login,
+      beforeEnter: (toolbar, from, next) => {
+        if (!isLoggedIn) {
+          next();
+        } else {
+          next("/");
+        }
+      }
     },
     {
       path: "*",
@@ -51,3 +87,13 @@ export default new Router({
   linkActiveClass: "active",
   mode: "history"
 });
+
+//routes.beforeEach((to, from, next) => {
+//  if (isLoggedIn) {
+//    next();
+//  } else {
+//    next("/login");
+//  }
+//});
+
+export default routes;
