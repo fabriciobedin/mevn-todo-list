@@ -1,5 +1,7 @@
 import express from "express";
 var app = express();
+import { registerRoutes } from "./routes";
+registerRoutes(app);
 
 app.get("/", function(req, res) {
   res.send("Hello World!");
