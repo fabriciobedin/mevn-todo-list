@@ -13,17 +13,12 @@ function index(req, res) {
     return res.json({ message: validation.message });
   }
 
-  var user = {
-    username: req.body.username.toLowerCase(),
-    password: req.body.password
-  };
-
-  console.log(user);
   return res.json();
 }
 
 function validateIndex(body) {
   var errors = "";
+
   if (_stringUtil.StringUtil.isEmpty(body.username)) {
     errors += "Username is required. ";
   }
