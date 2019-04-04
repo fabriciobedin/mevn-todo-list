@@ -21,13 +21,9 @@ var _moment = require("moment");
 
 var _moment2 = _interopRequireDefault(_moment);
 
-var _authService = require("../../services/auth-service");
-
-var auth = _interopRequireWildcard(_authService);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//import * as auth from "../../services/auth-service";
 
 function index(req, res) {
   // FIND ALL TASKS
@@ -41,7 +37,7 @@ function index(req, res) {
 }
 
 function create(req, res) {
-  var id = auth.getUserId(req);
+  var id = 10; //auth.getUserId(req);
   _userModel2.default.findOne({ _id: id }, function (error, user) {
     if (error && !user) {
       return res.status(500).json();
@@ -60,7 +56,7 @@ function create(req, res) {
 }
 
 function update(req, res) {
-  var id = auth.getUserId(req);
+  var id = 10; //auth.getUserId(req);
 
   _userModel2.default.findOne({ _id: id }, function (error, user) {
     if (error) {
@@ -83,7 +79,7 @@ function update(req, res) {
 }
 
 function remove(req, res) {
-  var id = auth.getUserId(req);
+  var id = 10; //auth.getUserId(req);
   _taskModel2.default.findOne({ _id: req.params.id }, function (error, task) {
     if (error) {
       return res.status(500).json();

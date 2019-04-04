@@ -1,7 +1,7 @@
 import User from "../../model/user-model";
 import Task from "../../model/task-model";
 import moment from "moment";
-import * as auth from "../../services/auth-service";
+//import * as auth from "../../services/auth-service";
 
 export function index(req, res) {
   // FIND ALL TASKS
@@ -15,7 +15,7 @@ export function index(req, res) {
 }
 
 export function create(req, res) {
-  const id = auth.getUserId(req);
+  const id = 10; //auth.getUserId(req);
   User.findOne({ _id: id }, (error, user) => {
     if (error && !user) {
       return res.status(500).json();
@@ -34,7 +34,7 @@ export function create(req, res) {
 }
 
 export function update(req, res) {
-  const id = auth.getUserId(req);
+  const id = 10; //auth.getUserId(req);
 
   User.findOne({ _id: id }, (error, user) => {
     if (error) {
@@ -57,7 +57,7 @@ export function update(req, res) {
 }
 
 export function remove(req, res) {
-  const id = auth.getUserId(req);
+  const id = 10; //auth.getUserId(req);
   Task.findOne({ _id: req.params.id }, (error, task) => {
     if (error) {
       return res.status(500).json();
