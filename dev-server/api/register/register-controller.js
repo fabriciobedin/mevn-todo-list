@@ -1,4 +1,5 @@
 import { StringUtil } from "../../utilities/string-util";
+import User from "../../model/user-model";
 
 export function index(req, res) {
   const validation = validateIndex(req.body);
@@ -6,13 +7,21 @@ export function index(req, res) {
     return res.status(400).json({ message: validation.message });
   }
 
-  const user = {
+  const user = new user({
     username: req.body.username.toLowerCase(),
     password: req.body.password
-  };
+  });
 
-  console.log(user);
-  return res.status(201).json();
+  user.save(error => {
+    if (error) {
+      // Mongoose Error Code 11000 means validation failure (username taken)
+      if (error.code === 11000) {
+        return res.status(403).json({ message: "Username is already taken" });
+      }
+      return res.status(500).json();
+    }
+    return res.status(201).json();
+  });
 }
 
 function validateIndex(body) {
